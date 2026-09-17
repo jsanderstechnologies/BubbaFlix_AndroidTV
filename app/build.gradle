@@ -17,9 +17,36 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures {
+        buildConfig true
+    }
+
+    flavorDimensions "channel"
+    productFlavors {
+        stable {
+            dimension "channel"
+            applicationIdSuffix ""
+            manifestPlaceholders = [appName: "BubbaFlix TV"]
+            buildConfigField "String", "UPDATE_JSON_URL", "\"https://raw.githubusercontent.com/jsanderstechnologies/BubbaFlix_AndroidTV/main/version.json\""
+            buildConfigField "String", "BUILD_CHANNEL", "\"release\""
+        }
+        nightly {
+            dimension "channel"
+            applicationIdSuffix ".nightly"
+            versionNameSuffix "-nightly"
+            manifestPlaceholders = [appName: "BubbaFlix TV (Nightly)"]
+            buildConfigField "String", "UPDATE_JSON_URL", "\"https://raw.githubusercontent.com/jsanderstechnologies/BubbaFlix_AndroidTV/main/version-nightly.json\""
+            buildConfigField "String", "BUILD_CHANNEL", "\"nightly\""
+        }
+    }
+
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
-            output.outputFileName = "BubbaFlixTV.apk"
+            if (variant.flavorName == 'nightly') {
+                output.outputFileName = "BubbaFlixTV-Nightly.apk"
+            } else {
+                output.outputFileName = "BubbaFlixTV.apk"
+            }
         }
     }
 

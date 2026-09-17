@@ -4,7 +4,7 @@ import { getServerUrl } from "../../utils/serverSettings";
 import versionData from "../../../version.json";
 import "./index.scss";
 
-const APK_URL = "https://raw.githubusercontent.com/jsanderstechnologies/BubbaFlix/master/BubbaFlixTV.apk";
+const APK_URL = "https://github.com/jsanderstechnologies/BubbaFlix_AndroidTV/releases/latest/download/BubbaFlixTV.apk";
 const DOWNLOADER_CODE = "7862216";
 
 const TvInstallPrompt = () => {

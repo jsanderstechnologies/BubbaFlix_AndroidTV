@@ -21,6 +21,7 @@ app/build/
 *.user
 
 # Local env files
+local.properties
 .env.local
 .env.development.local
 .env.test.local

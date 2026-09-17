@@ -20,7 +20,7 @@ import "./index.scss";
 const APP_VERSION = `v${versionData?.versionName || "1.0.5"}`;
 const CURRENT_VERSION_CODE = versionData?.versionCode || 6;
 const DOWNLOADER_CODE = "7862216";
-const GITHUB_REPO_URL = "https://github.com/jsanderstechnologies/BubbaFlix";
+const GITHUB_REPO_URL = "https://github.com/jsanderstechnologies/BubbaFlix_AndroidTV";
 
 const AboutPage = () => {
   const [checkingUpdate, setCheckingUpdate] = useState(false);
@@ -61,14 +61,16 @@ const AboutPage = () => {
     setUpdateResult(null);
 
     const timestamp = Date.now();
-    const githubUrl = `https://raw.githubusercontent.com/jsanderstechnologies/BubbaFlix/master/version.json?t=${timestamp}`;
-    const backendProxyUrl = `${getServerUrl()}/api/version?t=${timestamp}`;
+    const buildChannel = window.AndroidPlayer?.getBuildChannel?.() || "release";
+    const updateJsonUrl = window.AndroidPlayer?.getUpdateUrl?.() || 
+      (buildChannel === "nightly" 
+        ? `https://raw.githubusercontent.com/jsanderstechnologies/BubbaFlix_AndroidTV/main/version-nightly.json`
+        : `https://raw.githubusercontent.com/jsanderstechnologies/BubbaFlix_AndroidTV/main/version.json`);
 
     let remoteData = null;
 
-    // Strategy 1: Direct GitHub CDN fetch
     try {
-      const res = await fetch(githubUrl, {
+      const res = await fetch(`${updateJsonUrl}?t=${timestamp}`, {
         cache: "no-store",
         headers: { "Cache-Control": "no-cache" }
       });
@@ -76,39 +78,26 @@ const AboutPage = () => {
         remoteData = await res.json();
       }
     } catch (err) {
-      // Continue to Strategy 2
-    }
-
-    // Strategy 2: Backend proxy fetch if direct CDN failed or blocked by TV WebView
-    if (!remoteData) {
-      try {
-        const res = await fetch(backendProxyUrl, {
-          cache: "no-store",
-          headers: { "Cache-Control": "no-cache" }
-        });
-        if (res.ok) {
-          remoteData = await res.json();
-        }
-      } catch (err) {
-        // Both failed
-      }
+      console.warn("[AboutPage] Unable to fetch update JSON:", err.message);
     }
 
     if (remoteData) {
-      const remoteVersionCode = remoteData.versionCode || 6;
-      const currentVersionCode = CURRENT_VERSION_CODE;
+      const remoteVersionCode = remoteData.versionCode || remoteData.build || 0;
+      const currentVersionCode = window.AndroidPlayer?.getVersionCode?.() || CURRENT_VERSION_CODE;
+      const currentVersionName = window.AndroidPlayer?.getVersionName?.() || APP_VERSION;
 
       if (remoteVersionCode > currentVersionCode) {
+        const defaultApkName = buildChannel === "nightly" ? "BubbaFlixTV-Nightly.apk" : "BubbaFlixTV.apk";
         setUpdateResult({
           hasUpdate: true,
-          remoteVersion: remoteData.versionName || "1.0.5",
-          apkUrl: remoteData.apkUrl || `${GITHUB_REPO_URL}/raw/master/BubbaFlixTV.apk`,
+          remoteVersion: remoteData.versionName || remoteData.version || "1.0.0",
+          apkUrl: remoteData.apkUrl || `${GITHUB_REPO_URL}/releases/latest/download/${defaultApkName}`,
           releaseNotes: remoteData.releaseNotes || "New features and performance improvements available."
         });
       } else {
         setUpdateResult({
           hasUpdate: false,
-          message: `You are running the latest version of BubbaFlix TV (${APP_VERSION})!`
+          message: `You are running the latest ${buildChannel} version of BubbaFlix TV (${currentVersionName})!`
         });
       }
     } else {

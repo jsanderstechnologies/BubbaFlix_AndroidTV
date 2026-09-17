@@ -1,0 +1,89 @@
+name: Nightly Build
+
+on:
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-nightly:
+    name: Build & Publish Nightly APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Node Dependencies
+        run: npm ci
+
+      - name: Build Web UI
+        run: npm run build
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+
+      - name: Make Gradle Wrapper Executable
+        run: chmod +x gradlew
+
+      - name: Build Nightly Release APK
+        run: ./gradlew assembleNightlyRelease
+
+      - name: Generate Nightly Version Info
+        id: nightly_info
+        run: |
+          DATE_STR=$(date +'%Y%m%d')
+          VERSION_NAME="1.0.0-nightly.${DATE_STR}"
+          VERSION_CODE="${DATE_STR}"
+          echo "VERSION_NAME=${VERSION_NAME}" >> $GITHUB_OUTPUT
+          echo "VERSION_CODE=${VERSION_CODE}" >> $GITHUB_OUTPUT
+
+      - name: Update version-nightly.json
+        run: |
+          cat <<EOF > version-nightly.json
+          {
+            "version": "${{ steps.nightly_info.outputs.VERSION_NAME }}",
+            "versionName": "${{ steps.nightly_info.outputs.VERSION_NAME }}",
+            "versionCode": ${{ steps.nightly_info.outputs.VERSION_CODE }},
+            "build": ${{ steps.nightly_info.outputs.VERSION_CODE }},
+            "name": "BubbaFlix TV (Nightly)",
+            "channel": "nightly",
+            "apkUrl": "https://github.com/jsanderstechnologies/BubbaFlix_AndroidTV/releases/download/nightly/BubbaFlixTV-Nightly.apk",
+            "releaseNotes": "Automated Nightly Build (${{ steps.nightly_info.outputs.VERSION_NAME }})"
+          }
+          EOF
+
+      - name: Commit and Push version-nightly.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add version-nightly.json
+          git commit -m "chore(nightly): bump version-nightly.json to ${{ steps.nightly_info.outputs.VERSION_NAME }}" || echo "No changes to commit"
+          git push origin main || echo "Unable to push commit"
+
+      - name: Create or Update Nightly GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: nightly
+          name: BubbaFlix TV Nightly Build
+          body: "Latest automated nightly development build of BubbaFlix TV (${{ steps.nightly_info.outputs.VERSION_NAME }})."
+          draft: false
+          prerelease: true
+          files: |
+            app/build/outputs/apk/nightly/release/BubbaFlixTV-Nightly.apk
+            version-nightly.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -85,6 +85,26 @@ class MainActivity : AppCompatActivity() {
                 (activity as? MainActivity)?.promptExitApp()
             }
         }
+
+        @JavascriptInterface
+        fun getUpdateUrl(): String {
+            return BuildConfig.UPDATE_JSON_URL
+        }
+
+        @JavascriptInterface
+        fun getBuildChannel(): String {
+            return BuildConfig.BUILD_CHANNEL
+        }
+
+        @JavascriptInterface
+        fun getVersionName(): String {
+            return BuildConfig.VERSION_NAME
+        }
+
+        @JavascriptInterface
+        fun getVersionCode(): Int {
+            return BuildConfig.VERSION_CODE
+        }
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -127,7 +147,7 @@ class MainActivity : AppCompatActivity() {
         settings.cacheMode = WebSettings.LOAD_DEFAULT
 
         val defaultUserAgent = settings.userAgentString
-        settings.userAgentString = "$defaultUserAgent BubbaFlixTV/1.0.0 AndroidTV"
+        settings.userAgentString = "$defaultUserAgent BubbaFlixTV/${BuildConfig.VERSION_NAME} AndroidTV Channel/${BuildConfig.BUILD_CHANNEL}"
 
         webView.addJavascriptInterface(AndroidPlayerBridge(this, this), "AndroidPlayer")
 

@@ -1,5 +1,10 @@
 {
   "version": "1.0.0",
+  "versionName": "1.0.0",
+  "versionCode": 100,
+  "build": 100,
   "name": "BubbaFlix TV",
-  "build": 100
+  "channel": "release",
+  "apkUrl": "https://github.com/jsanderstechnologies/BubbaFlix_AndroidTV/releases/latest/download/BubbaFlixTV.apk",
+  "releaseNotes": "Stable Release"
 }
