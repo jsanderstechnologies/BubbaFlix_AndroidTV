@@ -19,7 +19,7 @@ import "./index.scss";
 
 const APP_VERSION = `v${versionData?.versionName || "1.0.5"}`;
 const CURRENT_VERSION_CODE = versionData?.versionCode || 6;
-const DOWNLOADER_CODE = "7862216";
+const DOWNLOADER_CODE = "2342403";
 const GITHUB_REPO_URL = "https://github.com/jsanderstechnologies/BubbaFlix_AndroidTV";
 
 const AboutPage = () => {

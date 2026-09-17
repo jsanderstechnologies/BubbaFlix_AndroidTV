@@ -6,6 +6,14 @@ Unlike the web version of BubbaFlix, **BubbaFlix Android TV operates 100% server
 
 ---
 
+## 📲 Downloader App Quick Code
+
+To install **BubbaFlix TV** directly on your Android TV, Firestick, or Google TV device using the **Downloader** app:
+
+- 📥 **Downloader Code**: `2342403`
+
+---
+
 ## 🌟 Features
 
 - 📱 **Standalone Client-Side Execution**: Runs embedded directly inside the Android TV app assets (`file:///android_asset/dist/index.html`). No server URL prompts or external web host needed.
@@ -54,6 +62,6 @@ Unlike the web version of BubbaFlix, **BubbaFlix Android TV operates 100% server
 
 ## 📲 Installation on Android TV / Firestick
 
-1. Transfer `BubbaFlixTV.apk` to your Android TV, Fire TV, or Google TV device using Downloader, ADB, or USB drive.
-2. Install and launch **BubbaFlix TV**.
-3. Open **Settings** screen on TV to configure your TMDB token, SIMKL keys, Groq AI key, or Premiumize key.
+1. Open the **Downloader** app on your TV and enter code `2342403` to download and install `BubbaFlixTV.apk`.
+2. Alternatively, transfer `BubbaFlixTV.apk` using ADB or USB drive.
+3. Launch **BubbaFlix TV** and open **Settings** screen on TV to configure your TMDB token, SIMKL keys, Groq AI key, or Premiumize key.

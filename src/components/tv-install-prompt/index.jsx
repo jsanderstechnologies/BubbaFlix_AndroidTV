@@ -5,7 +5,7 @@ import versionData from "../../../version.json";
 import "./index.scss";
 
 const APK_URL = "https://github.com/jsanderstechnologies/BubbaFlix_AndroidTV/releases/latest/download/BubbaFlixTV.apk";
-const DOWNLOADER_CODE = "7862216";
+const DOWNLOADER_CODE = "2342403";
 
 const TvInstallPrompt = () => {
   const [showPrompt, setShowPrompt] = useState(false);
