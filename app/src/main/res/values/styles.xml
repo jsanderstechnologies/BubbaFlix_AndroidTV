@@ -1,0 +1,16 @@
+<resources>
+    <style name="Theme.BubbaFlixTV" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:background">#141414</item>
+    </style>
+
+    <!-- Transparent Player Theme ensuring SurfaceView / TextureView video punch-hole is never covered -->
+    <style name="Theme.BubbaFlixTV.Player" parent="Theme.BubbaFlixTV">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackground">@android:color/transparent</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+</resources>

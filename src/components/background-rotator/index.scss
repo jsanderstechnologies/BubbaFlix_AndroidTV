@@ -1,0 +1,34 @@
+.backgroundRotatorStage {
+  position: fixed;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+  min-width: 125vw;
+  min-height: 125vh;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0.55;
+  filter: blur(3px);
+  transform: scale(1.15);
+  transform-origin: center center;
+
+  .bgLayer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity;
+
+    &.active {
+      opacity: 1;
+    }
+  }
+}

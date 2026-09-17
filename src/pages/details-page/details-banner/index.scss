@@ -1,0 +1,351 @@
+@import "../../../mixins.scss";
+
+.detailsBanner {
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	background-color: transparent;
+	padding-top: 80px;
+	margin-bottom: 20px;
+	@include md {
+		margin-bottom: 0;
+		padding-top: 95px;
+		min-height: 480px;
+	}
+	.backdrop-img {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		opacity: 0.1;
+		overflow: hidden;
+		.lazy-load-image-background {
+			width: 100%;
+			height: 100%;
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				object-position: center;
+			}
+		}
+	}
+	.opacity-layer {
+		width: 100%;
+		height: 200px;
+		background: linear-gradient(
+			180deg,
+			rgba(4, 21, 45, 0) 0%,
+			#04152d 79.17%
+		);
+		position: absolute;
+		bottom: 0;
+		left: 0;
+	}
+
+	.content {
+		display: flex;
+		position: relative;
+		flex-direction: column;
+		gap: 20px;
+		@include md {
+			gap: 28px;
+			flex-direction: row;
+			align-items: flex-start;
+		}
+		.left {
+			flex-shrink: 0;
+			width: 100%;
+			max-width: 200px;
+			margin: 0 auto;
+
+			@include md {
+				max-width: 230px;
+				margin: 0;
+			}
+
+			.lazy-load-image-background {
+				width: 100%;
+				display: block;
+				border-radius: 10px;
+				overflow: hidden;
+			}
+
+			.posterImg, img {
+				width: 100%;
+				display: block;
+				border-radius: 10px;
+				object-fit: cover;
+			}
+		}
+		.right {
+			color: white;
+			flex-grow: 1;
+			min-width: 0;
+
+			.title {
+				font-size: 22px;
+				line-height: 30px;
+				@include md {
+					font-size: 26px;
+					line-height: 34px;
+				}
+			}
+			.subtitle {
+				font-size: 13px;
+				line-height: 20px;
+				margin-bottom: 10px;
+				font-style: italic;
+				opacity: 0.5;
+				@include md {
+					font-size: 16px;
+					line-height: 22px;
+				}
+			}
+			.genres {
+				margin-bottom: 14px;
+				flex-flow: row wrap;
+			}
+			.overview {
+				margin-bottom: 16px;
+				.heading {
+					font-size: 18px;
+					margin-bottom: 6px;
+				}
+				.description {
+					font-size: 13.5px;
+					line-height: 20px;
+					@include md {
+						padding-right: 20px;
+					}
+				}
+			}
+			.circleRating {
+				max-width: 54px;
+				background-color: var(--black2);
+				@include md {
+					max-width: 64px;
+				}
+				.CircularProgressbar-text {
+					fill: white;
+				}
+			}
+			.playbtn {
+				display: flex;
+				align-items: center;
+				gap: 14px;
+				cursor: pointer;
+				svg {
+					width: 44px;
+					@include md {
+						width: 52px;
+					}
+				}
+				.text {
+					font-size: 15px;
+					transition: all 0.7s ease-in-out;
+				}
+				.triangle {
+					stroke-dasharray: 240;
+					stroke-dashoffset: 480;
+					stroke: white;
+					transform: translateY(0);
+					transition: all 0.7s ease-in-out;
+				}
+				.circle {
+					stroke: white;
+					stroke-dasharray: 650;
+					stroke-dashoffset: 1300;
+					transition: all 0.5s ease-in-out;
+				}
+				&:hover {
+					.text {
+						color: var(--pink);
+					}
+					.triangle {
+						stroke-dashoffset: 0;
+						opacity: 1;
+						stroke: var(--pink);
+						animation: trailorPlay 0.7s ease-in-out;
+					}
+					.circle {
+						stroke-dashoffset: 0;
+						stroke: var(--pink);
+					}
+				}
+			}
+			.row {
+				display: flex;
+				align-items: center;
+				flex-wrap: wrap;
+				gap: 16px;
+				margin-bottom: 16px;
+			}
+
+			.simklPicker {
+				margin-left: auto;
+
+				.simklSelect {
+					height: 36px;
+					background-color: var(--black2);
+					color: white;
+					border: 1px solid rgba(255, 255, 255, 0.2);
+					border-radius: 8px;
+					padding: 0 10px;
+					font-size: 12px;
+					font-weight: 600;
+					outline: none;
+					cursor: pointer;
+					transition: border-color 0.2s ease;
+
+					&:focus {
+						border-color: var(--pink);
+					}
+
+					option {
+						background-color: var(--black2);
+						color: white;
+					}
+				}
+			}
+
+			.info {
+				border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+				padding: 10px 0;
+				display: flex;
+				.infoItem {
+					margin-right: 10px;
+					display: flex;
+					flex-flow: row wrap;
+				}
+				.text {
+					margin-right: 10px;
+					opacity: 0.5;
+					font-size: 13px;
+					line-height: 20px;
+					&.bold {
+						font-weight: 600;
+						opacity: 1;
+					}
+				}
+			}
+			.collectionBannerSection {
+				background: linear-gradient(90deg, rgba(218, 47, 104, 0.15) 0%, rgba(255, 255, 255, 0.03) 100%);
+				border: 1px solid rgba(218, 47, 104, 0.35);
+				border-radius: 12px;
+				padding: 12px 18px;
+				margin: 20px 0;
+				width: 100%;
+				max-width: 580px;
+
+				.collectionBannerContent {
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					flex-wrap: wrap;
+					gap: 16px;
+
+					.collectionBannerLeft {
+						display: flex;
+						align-items: center;
+						gap: 14px;
+
+						.collectionLayersIcon {
+							font-size: 24px;
+							color: var(--pink);
+							flex-shrink: 0;
+						}
+
+						.collectionTextWrapper {
+							display: flex;
+							flex-direction: column;
+							gap: 2px;
+
+							.collectionSubtext {
+								font-size: 11px;
+								font-weight: 700;
+								color: #ffd700;
+								text-transform: uppercase;
+								letter-spacing: 1px;
+							}
+
+							.collectionTitleText {
+								font-size: 16px;
+								font-weight: 600;
+								color: white;
+								margin: 0;
+							}
+						}
+					}
+
+					.viewCollectionBtn {
+						background: rgba(218, 47, 104, 0.2);
+						border: 1px solid var(--pink);
+						color: white;
+						padding: 8px 16px;
+						border-radius: 20px;
+						font-size: 13px;
+						font-weight: 600;
+						cursor: pointer;
+						transition: all 0.2s ease;
+						outline: none;
+
+						&:hover,
+						&:focus {
+							background: var(--pink);
+							box-shadow: 0 0 12px rgba(218, 47, 104, 0.6);
+							transform: scale(1.05);
+						}
+
+						&:active {
+							transform: scale(0.98);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.detailsBannerSkeleton {
+		display: flex;
+		position: relative;
+		flex-direction: column;
+		gap: 20px;
+		@include md {
+			gap: 28px;
+			flex-direction: row;
+		}
+		.content-wrapper {
+			display: flex;
+			gap: 28px;
+		}
+		.left {
+			flex-shrink: 0;
+			width: 100%;
+			display: block;
+			border-radius: 10px;
+			aspect-ratio: 1/1.5;
+			@include md {
+				max-width: 230px;
+			}
+		}
+		.right {
+			width: 100%;
+			.row {
+				width: 100%;
+				height: 25px;
+				margin-bottom: 16px;
+				border-radius: 50px;
+				&:nth-child(2) {
+					width: 75%;
+					margin-bottom: 30px;
+				}
+				&:nth-child(5) {
+					width: 50%;
+					margin-bottom: 30px;
+				}
+			}
+		}
+	}
+}

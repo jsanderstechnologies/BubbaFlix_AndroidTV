@@ -1,0 +1,249 @@
+@import "../../mixins.scss";
+
+.continueWatchingSection {
+  margin-bottom: 50px;
+
+  .carouselTitle {
+    font-size: 24px;
+    color: white;
+    margin-bottom: 20px;
+    font-weight: normal;
+  }
+}
+
+.continueCarouselItems {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  overflow-y: visible;
+  margin: -24px -16px;
+  padding: 24px 16px;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+
+  &::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+
+  @include md {
+    gap: 12px;
+    overflow-x: auto;
+    overflow-y: visible;
+    margin: -24px -16px;
+    padding: 24px 16px;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+
+    &::-webkit-scrollbar {
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+    }
+  }
+}
+
+.continueItem {
+  width: calc(33.333% - 8px);
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 3px;
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.25s ease;
+  flex-shrink: 0;
+  outline: none;
+
+  @include xs {
+    width: calc(25% - 8px);
+  }
+  @include sm {
+    width: calc(20% - 10px);
+  }
+  @include md {
+    width: calc(16.666% - 10px);
+  }
+  @include lg {
+    width: calc(14.285% - 12px);
+  }
+  @include xl {
+    width: calc(12.5% - 12px);
+  }
+  @include xxl {
+    width: calc(11.111% - 14px);
+  }
+  @include xxxl {
+    width: calc(10% - 14px);
+  }
+  @include ultrawide {
+    width: calc(8.333% - 16px);
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: none !important;
+    transform: scale(1.14) translateY(-6px) translateZ(0);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.8), 0 0 20px var(--pink) !important;
+    z-index: 99 !important;
+    position: relative;
+
+    .resumeOverlay {
+      opacity: 1;
+    }
+  }
+
+  &:hover {
+    .resumeOverlay {
+      opacity: 1;
+    }
+  }
+}
+
+.continuePosterBlock {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1.5;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 6px;
+
+  .lazy-load-image-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+}
+
+.resumeOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.52);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  border-radius: 10px;
+  z-index: 5;
+
+  .resumeIcon {
+    font-size: 2rem;
+    color: #fff;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8));
+  }
+
+  .resumeLabel {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+}
+
+.continueProgressBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.6);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  overflow: hidden;
+  z-index: 6;
+
+  .continueProgressFill {
+    height: 100%;
+    background: var(--gradient);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+  }
+}
+
+.continueTextBlock {
+  color: white;
+  display: flex;
+  flex-direction: column;
+
+  .continueTitle {
+    font-size: 13px;
+    margin-bottom: 4px;
+    line-height: 18px;
+    @include ellipsis(1);
+
+    @include md {
+      font-size: 14px;
+      line-height: 19px;
+    }
+  }
+
+  .continueSubtitle {
+    font-size: 11px;
+    opacity: 0.55;
+  }
+}
+
+.clearProgressBtn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 10;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease, background 0.15s ease;
+  font-size: 14px;
+  padding: 0;
+
+  svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    background: var(--pink);
+    transform: scale(1.15);
+  }
+
+  &:focus,
+  &:focus-visible {
+    opacity: 1 !important;
+    background: var(--pink);
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+    transform: scale(1.15);
+  }
+}
+
+// Show X button when parent tile is hovered or focused
+.continueItem:hover .clearProgressBtn,
+.continueItem:focus .clearProgressBtn,
+.continueItem:focus-within .clearProgressBtn {
+  opacity: 1;
+}

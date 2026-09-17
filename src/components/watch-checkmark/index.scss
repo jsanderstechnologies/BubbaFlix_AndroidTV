@@ -1,0 +1,73 @@
+@import "../../mixins.scss";
+
+.watchCheckmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.2s ease;
+
+  &:focus {
+    outline: 2px solid var(--pink);
+  }
+
+  .checkIcon {
+    font-size: 18px;
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+
+  &.watched {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.08);
+
+    .checkIcon {
+      color: var(--pink);
+    }
+  }
+
+  &.unwatched {
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+      color: white;
+
+      .checkIcon {
+        color: var(--pink);
+      }
+    }
+  }
+
+  &.size-sm {
+    padding: 4px 8px;
+    font-size: 12px;
+    .checkIcon {
+      font-size: 15px;
+    }
+  }
+
+  &.size-lg {
+    padding: 10px 18px;
+    font-size: 14px;
+    background-color: var(--black2);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    .checkIcon {
+      font-size: 20px;
+    }
+
+    &.watched {
+      border-color: var(--pink);
+    }
+  }
+
+  &.toggling {
+    opacity: 0.6;
+  }
+}

@@ -1,0 +1,159 @@
+@import "../../mixins.scss";
+
+.favoritesPage {
+  min-height: 700px;
+  padding-top: 10px;
+  padding-bottom: 60px;
+  background-color: transparent;
+  color: #ffffff;
+
+  .pageHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 30px;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .pageTitle {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      .titleIcon {
+        font-size: 32px;
+      }
+
+      h1 {
+        font-size: 28px;
+        font-weight: 700;
+        margin: 0;
+      }
+
+      .countBadge {
+        background: rgba(255, 215, 0, 0.15);
+        color: #ffd700;
+        border: 1px solid rgba(255, 215, 0, 0.4);
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+      }
+    }
+
+    .tabSelector {
+      display: flex;
+      gap: 10px;
+
+              .tabItem.selectContainer {
+            &:has(.tvSortSelect:focus), &:has(.tvSortSelect.isFocused) {
+                background: white;
+                color: black;
+                transform: scale(1.05);
+                box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+                border-color: transparent;
+                
+                .tvSortSelect {
+                    color: black !important;
+                }
+                div {
+                    color: black !important;
+                }
+            }
+            &:hover {
+                background: rgba(255, 255, 255, 0.2);
+            }
+        }
+
+        .tabItem {
+        display: inline-flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: #cccccc;
+        padding: 8px 18px;
+        border-radius: 25px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        outline: none;
+
+        &:hover,
+        &:focus {
+          background: rgba(255, 215, 0, 0.2);
+          border-color: #ffd700;
+          color: #ffd700;
+          transform: scale(1.04);
+        }
+
+        &.active {
+          background: #ffd700;
+          border-color: #ffd700;
+          color: #000000;
+        }
+      }
+    }
+  }
+
+  .content {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 8px;
+    padding: 24px 16px;
+    margin: -24px -16px 34px -16px;
+    overflow: visible;
+    @include md {
+      gap: 12px;
+      padding: 24px 16px;
+      margin: -24px -16px 34px -16px;
+    }
+  }
+
+  .emptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    border: 1px dashed rgba(255, 255, 255, 0.15);
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      color: #aaaaaa;
+      font-size: 15px;
+      max-width: 400px;
+      margin-bottom: 24px;
+    }
+
+    .exploreBtn {
+      background: var(--gradient);
+      color: #ffffff;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      outline: none;
+      transition: transform 0.2s ease;
+
+      &:hover,
+      &:focus {
+        transform: scale(1.06);
+        box-shadow: 0 0 20px rgba(255, 77, 77, 0.4);
+      }
+    }
+  }
+}

@@ -1,0 +1,300 @@
+@import "../../mixins.scss";
+
+.aboutPage {
+  min-height: 700px;
+  padding-top: 20px;
+  padding-bottom: 60px;
+  background-color: var(--black);
+  color: #ffffff;
+
+  .aboutContainer {
+    max-width: 900px;
+    margin: 0 auto;
+
+    .appHeaderCard {
+      background: linear-gradient(180deg, rgba(218, 47, 104, 0.15) 0%, rgba(20, 21, 26, 0.9) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 40px 30px;
+      text-align: center;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+
+      .aboutLogoWrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 16px;
+
+        .aboutLogoImage {
+          height: 95px;
+          max-height: 105px;
+          width: auto;
+          max-width: 400px;
+          object-fit: contain;
+          filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.7));
+        }
+      }
+
+      .appBadge {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: var(--pink);
+        font-weight: 700;
+        font-size: 13px;
+        padding: 4px 14px;
+        border-radius: 20px;
+        margin-bottom: 12px;
+      }
+
+      .appTagline {
+        font-size: 15px;
+        color: rgba(255, 255, 255, 0.7);
+        max-width: 500px;
+        margin: 0 auto;
+        line-height: 1.5;
+      }
+    }
+
+    .aboutGrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 20px;
+
+      .infoCard {
+        background: #14151a;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 16px;
+        padding: 24px;
+        outline: none;
+        transition: transform 0.2s ease, border-color 0.2s ease;
+
+        &:hover,
+        &:focus,
+        &:focus-visible {
+          transform: scale(1.02);
+          border-color: var(--pink);
+        }
+
+        &.fullWidth {
+          grid-column: 1 / -1;
+        }
+
+        .cardHeader {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-bottom: 18px;
+
+          .cardIcon {
+            font-size: 22px;
+            color: var(--pink);
+          }
+
+          h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0;
+          }
+        }
+
+        .cardBody {
+          .detailRow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+            .label {
+              font-size: 14px;
+              color: rgba(255, 255, 255, 0.65);
+            }
+
+            .value {
+              font-size: 14px;
+              font-weight: 600;
+
+              &.highlight {
+                color: #81c784;
+              }
+
+              &.code {
+                background: rgba(255, 255, 255, 0.1);
+                color: var(--pink);
+                padding: 2px 8px;
+                border-radius: 6px;
+                font-family: monospace;
+                font-size: 15px;
+              }
+            }
+          }
+
+          .updateActionArea {
+            margin-top: 20px;
+
+            .checkUpdateBtn {
+              width: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 8px;
+              background: var(--gradient);
+              color: white;
+              border: none;
+              padding: 12px 20px;
+              border-radius: 25px;
+              font-size: 14px;
+              font-weight: 600;
+              cursor: pointer;
+              outline: none;
+              transition: transform 0.2s ease;
+
+              &:hover,
+              &:focus {
+                transform: scale(1.03);
+              }
+
+              .spinIcon {
+                animation: spin 1s linear infinite;
+              }
+            }
+
+            .updateStatusBox {
+              margin-top: 14px;
+              padding: 14px;
+              border-radius: 12px;
+              font-size: 13px;
+
+              &.latest {
+                background: rgba(129, 199, 132, 0.12);
+                border: 1px solid rgba(129, 199, 132, 0.3);
+                color: #81c784;
+
+                .statusLatest {
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+                  font-weight: 600;
+                }
+              }
+
+              &.hasUpdate {
+                background: rgba(218, 47, 104, 0.15);
+                border: 1px solid rgba(218, 47, 104, 0.4);
+                color: white;
+
+                .statusTitle {
+                  font-weight: 700;
+                  font-size: 14px;
+                  color: var(--pink);
+                  margin-bottom: 6px;
+                }
+
+                p {
+                  margin: 0 0 12px 0;
+                  color: rgba(255, 255, 255, 0.8);
+                }
+
+                .downloadApkBtn {
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 6px;
+                  background: var(--gradient);
+                  color: white;
+                  padding: 8px 16px;
+                  border-radius: 20px;
+                  font-weight: 600;
+                  text-decoration: none;
+
+                  &:hover,
+                  &:focus {
+                    transform: scale(1.04);
+                  }
+                }
+              }
+
+              .statusError {
+                color: #ff8a80;
+              }
+            }
+          }
+
+          .description {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+            margin-bottom: 20px;
+          }
+
+          .linkGroup {
+            .githubRepoLink {
+              display: inline-flex;
+              align-items: center;
+              gap: 8px;
+              background: rgba(255, 255, 255, 0.1);
+              border: 1px solid rgba(255, 255, 255, 0.2);
+              color: white;
+              padding: 10px 20px;
+              border-radius: 25px;
+              font-size: 14px;
+              font-weight: 600;
+              text-decoration: none;
+              transition: all 0.2s ease;
+
+              &:hover,
+              &:focus {
+                background: white;
+                color: black;
+                transform: scale(1.04);
+              }
+            }
+          }
+
+          &.specGrid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+
+            .specItem {
+              background: rgba(255, 255, 255, 0.04);
+              border-radius: 10px;
+              padding: 12px 14px;
+
+              &.highlightGpu {
+                background: rgba(218, 47, 104, 0.15);
+                border: 1px solid rgba(218, 47, 104, 0.4);
+
+                .gpuValue {
+                  color: #81c784;
+                  font-weight: 700;
+                }
+              }
+
+              .specLabel {
+                display: block;
+                font-size: 11px;
+                color: rgba(255, 255, 255, 0.5);
+                margin-bottom: 4px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+              }
+
+              .specValue {
+                font-size: 13px;
+                font-weight: 600;
+                color: white;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

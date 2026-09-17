@@ -1,0 +1,145 @@
+@import "../../mixins.scss";
+.movieCard {
+	width: calc(33.333% - 8px);
+	margin-bottom: 18px;
+	cursor: pointer;
+	flex-shrink: 0;
+	border-radius: 10px;
+	padding: 3px;
+	transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.25s ease;
+
+	@include xs {
+		width: calc(25% - 8px);
+	}
+	@include sm {
+		width: calc(20% - 10px);
+	}
+	@include md {
+		width: calc(16.666% - 10px);
+	}
+	@include lg {
+		width: calc(14.285% - 12px);
+	}
+	@include xl {
+		width: calc(12.5% - 12px);
+	}
+	@include xxl {
+		width: calc(11.111% - 14px);
+	}
+	@include xxxl {
+		width: calc(10% - 14px);
+	}
+	@include ultrawide {
+		width: calc(8.333% - 16px);
+	}
+
+	/* 3D "Bring Forward" Elevation Focus Effect */
+	&:focus,
+	&:focus-visible {
+		outline: none !important;
+		position: relative;
+		z-index: 99 !important;
+		transform: scale(1.14) translateY(-6px) translateZ(0);
+		box-shadow: 0 16px 32px rgba(0, 0, 0, 0.8), 0 0 20px var(--pink) !important;
+	}
+	.posterBlock {
+		position: relative;
+		width: 100%;
+		aspect-ratio: 1 / 1.5;
+		background-size: cover;
+		background-position: center;
+		margin-bottom: 14px;
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-between;
+		padding: 6px;
+		transition: all ease 0.3s;
+		.lazy-load-image-background {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			border-radius: 10px;
+			overflow: hidden;
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				object-position: center;
+			}
+		}
+		.cardProgressBar {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 4px;
+			background: rgba(0, 0, 0, 0.6);
+			border-bottom-left-radius: 10px;
+			border-bottom-right-radius: 10px;
+			overflow: hidden;
+			z-index: 6;
+
+			.cardProgressFill {
+				height: 100%;
+				background: var(--gradient);
+				border-radius: 4px;
+			}
+		}
+		.circleRating {
+			width: 32px;
+			height: 32px;
+			position: relative;
+			top: 18px;
+			background-color: white;
+			flex-shrink: 0;
+			@include md {
+				width: 36px;
+				height: 36px;
+			}
+		}
+		.cardCheckmark {
+			position: absolute;
+			top: 6px;
+			right: 6px;
+			z-index: 5;
+			background-color: rgba(0, 0, 0, 0.6);
+			backdrop-filter: blur(4px);
+			border-radius: 20px;
+		}
+		.genres {
+			display: none;
+			position: relative;
+			@include md {
+				display: flex;
+				flex-flow: wrap;
+				justify-content: flex-end;
+			}
+		}
+	}
+	.textBlock {
+		color: white;
+		display: flex;
+		flex-direction: column;
+		.title {
+			font-size: 13px;
+			margin-bottom: 4px;
+			line-height: 18px;
+			@include ellipsis(1);
+			@include md {
+				font-size: 14px;
+				line-height: 19px;
+			}
+		}
+		.date {
+			font-size: 11px;
+			opacity: 0.55;
+		}
+	}
+	&:hover {
+		.posterBlock {
+			opacity: 0.85;
+		}
+	}
+}

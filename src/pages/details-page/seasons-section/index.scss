@@ -1,0 +1,227 @@
+@import "../../../mixins.scss";
+
+.seasonsSection {
+  margin-top: 40px;
+  margin-bottom: 40px;
+
+  .seasonsHeaderCard {
+    background-color: var(--black3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    @include md {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .titleArea {
+      .sectionHeading {
+        font-size: 22px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: white;
+
+        .headingIcon {
+          color: var(--pink);
+        }
+      }
+
+      .subHeading {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.6);
+        margin-top: 6px;
+      }
+    }
+
+    .seasonControls {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      @include md {
+        flex-direction: row;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .seasonPicker {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        label {
+          font-size: 14px;
+          font-weight: 600;
+          color: rgba(255, 255, 255, 0.8);
+          white-space: nowrap;
+        }
+
+        .seasonSelect {
+          height: 44px;
+          background-color: var(--black2);
+          color: white;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: 8px;
+          padding: 0 16px;
+          font-size: 14px;
+          font-weight: 600;
+          outline: none;
+          cursor: pointer;
+
+          &:focus {
+            border-color: var(--pink);
+          }
+
+          option {
+            background-color: var(--black2);
+            color: white;
+          }
+        }
+      }
+    }
+  }
+
+  .episodesLoading {
+    height: 150px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .episodesList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .episodeCard {
+      background-color: var(--black3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: border-color 0.2s ease;
+
+      &:hover {
+        border-color: rgba(255, 255, 255, 0.25);
+      }
+
+      .episodeMain {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        @include md {
+          flex-direction: row;
+          align-items: flex-start;
+          gap: 24px;
+        }
+
+        .stillBlock {
+          width: 100%;
+          aspect-ratio: 16 / 9;
+          border-radius: 8px;
+          overflow: hidden;
+          flex-shrink: 0;
+          background-color: var(--black2);
+
+          @include md {
+            width: 240px;
+          }
+
+          .stillImg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+
+        .episodeInfo {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          flex-grow: 1;
+
+          .epHeader {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+
+            .epBadge {
+              background: var(--gradient);
+              color: white;
+              font-size: 13px;
+              font-weight: 700;
+              padding: 4px 10px;
+              border-radius: 6px;
+            }
+
+            .epTitle {
+              font-size: 18px;
+              font-weight: 700;
+              color: white;
+            }
+          }
+
+          .epMeta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+
+            .metaItem {
+              display: flex;
+              align-items: center;
+              gap: 6px;
+
+              &.rating {
+                color: #ffc107;
+                font-weight: 600;
+              }
+            }
+          }
+
+          .epOverview {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.5;
+            margin-top: 4px;
+          }
+        }
+      }
+
+      .episodeStreams {
+        margin-top: 8px;
+
+        .unreleasedNotice {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 12px 16px;
+          background-color: var(--black2);
+          border: 1px dashed rgba(255, 255, 255, 0.2);
+          border-radius: 8px;
+          color: rgba(255, 255, 255, 0.6);
+          font-size: 13px;
+
+          .clockIcon {
+            color: var(--pink);
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,151 @@
+@import "../../mixins.scss";
+
+.explorePage {
+	min-height: 700px;
+	padding-top: 10px;
+	padding-bottom: 50px;
+
+	.resultNotFound {
+		font-size: 20px;
+		color: rgba(255, 255, 255, 0.7);
+		margin-top: 40px;
+		display: block;
+	}
+
+	.exploreTabSwitcher {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		margin-bottom: 24px;
+
+		        .tabBtn.selectContainer {
+            &:has(.tvSortSelect:focus), &:has(.tvSortSelect.isFocused) {
+                background: white;
+                color: black;
+                transform: scale(1.05);
+                box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+                border-color: transparent;
+                
+                .tvSortSelect {
+                    color: black !important;
+                }
+                div {
+                    color: black !important;
+                }
+            }
+            &:hover {
+                background: rgba(255, 255, 255, 0.2);
+            }
+        }
+
+        .tabBtn {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			background: rgba(255, 255, 255, 0.08);
+			border: 1px solid rgba(255, 255, 255, 0.15);
+			color: rgba(255, 255, 255, 0.7);
+			padding: 10px 20px;
+			border-radius: 25px;
+			font-size: 14px;
+			font-weight: 600;
+			cursor: pointer;
+			transition: all 0.25s ease;
+			outline: none;
+
+			&:hover,
+			&:focus,
+			&:focus-visible,
+			&.active {
+				background: var(--pink);
+				border-color: var(--pink);
+				color: #ffffff;
+				box-shadow: 0 4px 16px rgba(218, 47, 104, 0.5);
+				transform: scale(1.04);
+			}
+		}
+	}
+
+	.pageHeader {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 30px;
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 15px;
+	}
+
+	.pageTitle {
+		font-size: 28px;
+		font-weight: 700;
+		color: white;
+		margin: 0;
+	}
+
+	.filters {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+
+		.selectWrapper {
+			position: relative;
+			display: flex;
+			align-items: center;
+
+			.selectIcon {
+				position: absolute;
+				left: 14px;
+				color: var(--pink);
+				font-size: 18px;
+				pointer-events: none;
+				z-index: 2;
+			}
+
+			.tvSortSelect {
+				appearance: none;
+				-webkit-appearance: none;
+				background-color: var(--black3);
+				color: white;
+				border: 1px solid rgba(255, 255, 255, 0.2);
+				border-radius: 20px;
+				padding: 10px 20px 10px 42px;
+				font-size: 14px;
+				font-weight: 600;
+				cursor: pointer;
+				outline: none;
+				transition: all 0.25s ease;
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+
+				option {
+					background-color: var(--black2);
+					color: white;
+					padding: 10px;
+				}
+
+				&:hover,
+				&:focus,
+				&:focus-visible {
+					border-color: var(--pink);
+					background-color: rgba(255, 255, 255, 0.15);
+					box-shadow: 0 0 16px var(--pink), 0 4px 20px rgba(218, 47, 104, 0.6);
+					transform: scale(1.05);
+				}
+			}
+		}
+	}
+
+	.content {
+		display: flex;
+		flex-flow: row wrap;
+		gap: 8px;
+		padding: 24px 16px;
+		margin: -24px -16px 34px -16px;
+		overflow: visible;
+		@include md {
+			gap: 12px;
+			padding: 24px 16px;
+			margin: -24px -16px 34px -16px;
+		}
+	}
+}

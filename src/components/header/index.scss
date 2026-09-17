@@ -1,0 +1,154 @@
+@import "../../mixins.scss";
+
+.header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	transform: translateY(0);
+	width: 100%;
+	height: 88px;
+	z-index: 1000 !important;
+	display: flex;
+	align-items: center;
+	transition: background-color ease 0.3s;
+	background: var(--black3);
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+
+	&.top {
+		background: rgba(0, 0, 0, 0.75);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
+	}
+	&.show {
+		background: var(--black3);
+	}
+
+	.content-wrapper,
+	.contentWrapper {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: 100%;
+		flex-wrap: nowrap;
+	}
+
+	.logo {
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		flex-shrink: 0;
+		border-radius: 8px;
+		padding: 4px;
+		transition: transform 0.25s ease, filter 0.25s ease;
+
+		img {
+			height: 68px;
+			max-height: 70px;
+			width: auto;
+			max-width: 300px;
+			object-fit: contain;
+			filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+		}
+
+		&:focus,
+		&:focus-visible {
+			outline: none !important;
+			transform: scale(1.1) translateY(-2px);
+			filter: drop-shadow(0 0 12px var(--pink));
+		}
+	}
+
+	.menuItems {
+		list-style-type: none;
+		display: flex !important; /* Always display menu items for TV & Remote D-Pad Navigation */
+		align-items: center;
+		justify-content: flex-end;
+		flex: 1;
+		margin: 0 0 0 12px;
+		padding: 0;
+		overflow-x: auto;
+		scrollbar-width: none; /* Firefox */
+		&::-webkit-scrollbar {
+			display: none; /* Chrome/Safari */
+		}
+
+		.menuItem {
+			height: 64px;
+			display: flex;
+			align-items: center;
+			margin: 0 3px;
+			color: white;
+			font-weight: 600;
+			font-size: 13.5px;
+			position: relative;
+			cursor: pointer;
+			border-radius: 8px;
+			padding: 4px 8px;
+			white-space: nowrap;
+			flex-shrink: 0;
+			transition: transform 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+
+			svg {
+				font-size: 16px;
+			}
+
+			&:hover,
+			&:focus,
+			&:focus-visible {
+				color: var(--pink);
+				outline: none !important;
+				transform: scale(1.08) translateY(-2px);
+				box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6), 0 0 15px var(--pink) !important;
+			}
+		}
+	}
+
+	.mobileMenuItems {
+		display: none !important; /* Hide hamburger menu to ensure direct D-Pad navigation */
+	}
+
+	.searchBar {
+		width: 100%;
+		height: 64px;
+		background-color: var(--black3);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+		position: absolute;
+		top: 64px;
+		left: 0;
+		z-index: 1001;
+
+		.searchInput {
+			display: flex;
+			align-items: center;
+			height: 44px;
+			margin-top: 10px;
+			width: 100%;
+
+			svg {
+				font-size: 20px;
+				flex-shrink: 0;
+				cursor: pointer;
+				&:first-child {
+					color: white;
+					margin-left: 15px;
+				}
+				&:last-child {
+					color: #999;
+					margin-right: 15px;
+				}
+			}
+
+			input {
+				width: 100%;
+				height: 50px;
+				background-color: rgba(255, 255, 255, 0.1);
+				color: white;
+				outline: 0;
+				border: 1px solid rgba(255, 255, 255, 0.2);
+				border-radius: 30px;
+				padding: 0 20px;
+				font-size: 16px;
+			}
+		}
+	}
+}
