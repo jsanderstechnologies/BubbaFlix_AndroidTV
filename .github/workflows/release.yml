@@ -36,7 +36,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'npm'
 
       - name: Install Node Dependencies
@@ -66,6 +66,7 @@ jobs:
             VERSION_NAME="${{ github.event.inputs.version_name }}"
             VERSION_CODE="${{ github.event.inputs.version_code }}"
             RELEASE_NOTES="${{ github.event.inputs.release_notes }}"
+            TAG_NAME="v${VERSION_NAME}"
           else
             VERSION_NAME="${TAG_NAME#v}"
             VERSION_CODE=$(git rev-list --count HEAD)
@@ -74,6 +75,7 @@ jobs:
           echo "VERSION_NAME=${VERSION_NAME}" >> $GITHUB_OUTPUT
           echo "VERSION_CODE=${VERSION_CODE}" >> $GITHUB_OUTPUT
           echo "RELEASE_NOTES=${RELEASE_NOTES}" >> $GITHUB_OUTPUT
+          echo "TAG_NAME=${TAG_NAME}" >> $GITHUB_OUTPUT
 
       - name: Update version.json
         run: |
@@ -98,16 +100,16 @@ jobs:
           git commit -m "chore(release): bump version.json to ${{ steps.version_info.outputs.VERSION_NAME }}" || echo "No changes to commit"
           git push origin main || echo "Unable to push commit"
 
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: ${{ github.ref_name }}
-          name: BubbaFlix TV v${{ steps.version_info.outputs.VERSION_NAME }}
-          body: ${{ steps.version_info.outputs.RELEASE_NOTES }}
-          draft: false
-          prerelease: false
-          files: |
-            app/build/outputs/apk/stable/release/BubbaFlixTV.apk
-            version.json
+      - name: Create or Update GitHub Release
+        run: |
+          gh release create "${{ steps.version_info.outputs.TAG_NAME }}" \
+            app/build/outputs/apk/stable/release/BubbaFlixTV.apk \
+            version.json \
+            --title "BubbaFlix TV v${{ steps.version_info.outputs.VERSION_NAME }}" \
+            --notes "${{ steps.version_info.outputs.RELEASE_NOTES }}" \
+            || gh release upload "${{ steps.version_info.outputs.TAG_NAME }}" \
+                 app/build/outputs/apk/stable/release/BubbaFlixTV.apk \
+                 version.json \
+                 --clobber
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

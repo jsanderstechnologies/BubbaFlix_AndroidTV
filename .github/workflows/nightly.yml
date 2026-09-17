@@ -20,7 +20,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'npm'
 
       - name: Install Node Dependencies
@@ -75,15 +75,19 @@ jobs:
           git push origin main || echo "Unable to push commit"
 
       - name: Create or Update Nightly GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: nightly
-          name: BubbaFlix TV Nightly Build
-          body: "Latest automated nightly development build of BubbaFlix TV (${{ steps.nightly_info.outputs.VERSION_NAME }})."
-          draft: false
-          prerelease: true
-          files: |
-            app/build/outputs/apk/nightly/release/BubbaFlixTV-Nightly.apk
-            version-nightly.json
+        run: |
+          git tag -f nightly
+          git push origin nightly --force || true
+
+          gh release create nightly \
+            app/build/outputs/apk/nightly/release/BubbaFlixTV-Nightly.apk \
+            version-nightly.json \
+            --title "BubbaFlix TV Nightly Build" \
+            --notes "Latest automated nightly development build of BubbaFlix TV (${{ steps.nightly_info.outputs.VERSION_NAME }})." \
+            --prerelease \
+            || gh release upload nightly \
+                 app/build/outputs/apk/nightly/release/BubbaFlixTV-Nightly.apk \
+                 version-nightly.json \
+                 --clobber
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
