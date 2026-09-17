@@ -50,8 +50,6 @@ export const fetchServerSettings = async () => {
   const groqKey = localStorage.getItem("groq_api_key") || "";
   const tmdbToken = localStorage.getItem("tmdb_token") || "";
   const premiumizeKey = localStorage.getItem("premiumize_api_key") || "";
-  const dispatcharrUrl = localStorage.getItem("dispatcharr_url") || "";
-  const dispatcharrApiKey = localStorage.getItem("dispatcharr_api_key") || "";
 
   applyTheme(theme);
   if (simklClientId) {
@@ -65,8 +63,6 @@ export const fetchServerSettings = async () => {
     groqKey,
     tmdbToken,
     premiumizeKey,
-    dispatcharrUrl,
-    dispatcharrApiKey,
     stream_resolutions: JSON.parse(localStorage.getItem("stream_resolutions") || '["2160p", "1080p", "720p", "480p"]'),
     stream_exclude_low_quality: JSON.parse(localStorage.getItem("stream_exclude_low_quality") || "true")
   };
@@ -97,12 +93,6 @@ export const updateServerSettings = async (settingsPartial) => {
     } else {
       localStorage.removeItem("premiumize_api_key");
     }
-  }
-  if (settingsPartial.dispatcharrUrl !== undefined) {
-    localStorage.setItem("dispatcharr_url", settingsPartial.dispatcharrUrl.trim());
-  }
-  if (settingsPartial.dispatcharrApiKey !== undefined) {
-    localStorage.setItem("dispatcharr_api_key", settingsPartial.dispatcharrApiKey.trim());
   }
   return { success: true };
 };

@@ -48,42 +48,6 @@ export const toggleFavorite = (item) => {
   return isNowAdded;
 };
 
-// Live TV Favorite Channels Utility
-export const getFavoriteChannels = () => {
-  if (typeof window === "undefined") return [];
-  try {
-    const raw = localStorage.getItem("bubbaflix_favorite_channels");
-    return raw ? JSON.parse(raw) : [];
-  } catch (e) {
-    return [];
-  }
-};
-
-export const toggleFavoriteChannel = (channelId) => {
-  if (typeof window === "undefined" || !channelId) return false;
-  const idStr = String(channelId);
-  let favorites = getFavoriteChannels();
-  let isFav = false;
-
-  if (favorites.includes(idStr)) {
-    favorites = favorites.filter((id) => id !== idStr);
-    isFav = false;
-  } else {
-    favorites.push(idStr);
-    isFav = true;
-  }
-
-  localStorage.setItem("bubbaflix_favorite_channels", JSON.stringify(favorites));
-  window.dispatchEvent(new Event("favorite-channels-updated"));
-  return isFav;
-};
-
-export const isFavoriteChannel = (channelId) => {
-  if (!channelId) return false;
-  const favorites = getFavoriteChannels();
-  return favorites.includes(String(channelId));
-};
-
 // TMDB Collections Favorites Utility
 export const getFavoriteCollections = () => {
   if (typeof window === "undefined") return [];

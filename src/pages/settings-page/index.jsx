@@ -46,12 +46,6 @@ const SettingsPage = () => {
   const [showGroqKey, setShowGroqKey] = useState(false);
   const [groqStatus, setGroqStatus] = useState(null);
 
-  // Dispatcharr Live TV State
-  const [dispatcharrUrl, setDispatcharrUrl] = useState("");
-  const [dispatcharrApiKey, setDispatcharrApiKey] = useState("");
-  const [showDispatcharrKey, setShowDispatcharrKey] = useState(false);
-  const [dispatcharrStatus, setDispatcharrStatus] = useState(null);
-
   // Stream Resolution & Quality Filter State
   const [selectedResolutions, setSelectedResolutions] = useState(["2160p", "1080p", "720p", "480p"]);
   const [excludeLowQuality, setExcludeLowQuality] = useState(true);
@@ -84,11 +78,6 @@ const SettingsPage = () => {
 
     const activePrem = getPremiumizeKey() || "";
     setPremiumizeKey(activePrem);
-
-    const activeDispUrl = localStorage.getItem("dispatcharr_url") || "";
-    setDispatcharrUrl(activeDispUrl);
-    const activeDispKey = localStorage.getItem("dispatcharr_api_key") || "";
-    setDispatcharrApiKey(activeDispKey);
 
     const resConfig = (localStorage.getItem("stream_resolutions") ? JSON.parse(localStorage.getItem("stream_resolutions")) : null) || ["2160p", "1080p", "720p", "480p"];
     setSelectedResolutions(resConfig);
@@ -247,23 +236,6 @@ const SettingsPage = () => {
     setPremiumizeStatus({ type: "success", text: "Premiumize API Key cleared." });
   };
 
-  const handleSaveDispatcharr = async (e) => {
-    e.preventDefault();
-    const cleanUrl = dispatcharrUrl.trim();
-    const cleanKey = dispatcharrApiKey.trim();
-    localStorage.setItem("dispatcharr_url", cleanUrl);
-    localStorage.setItem("dispatcharr_api_key", cleanKey);
-    setDispatcharrStatus({ type: "success", text: "Dispatcharr Live TV configuration saved!" });
-  };
-
-  const handleClearDispatcharr = async () => {
-    localStorage.removeItem("dispatcharr_url");
-    localStorage.removeItem("dispatcharr_api_key");
-    setDispatcharrUrl("");
-    setDispatcharrApiKey("");
-    setDispatcharrStatus({ type: "info", text: "Dispatcharr settings cleared." });
-  };
-
   const handleToggleResolution = (resId) => {
     setSelectedResolutions((prev) =>
       prev.includes(resId) ? prev.filter((id) => id !== resId) : [...prev, resId]
@@ -318,7 +290,7 @@ const SettingsPage = () => {
               <FiKey className="icon" /> BubbaFlix TV Settings
             </h1>
             <p className="subtitle">
-              Configure your color theme, allowed stream resolutions, Dispatcharr Live TV, SIMKL history tracking, and API keys directly on your TV.
+              Configure your color theme, allowed stream resolutions, SIMKL history tracking, and API keys directly on your TV.
             </p>
           </div>
 
@@ -382,66 +354,6 @@ const SettingsPage = () => {
                 </div>
               ))}
             </div>
-          </div>
-
-          {/* Dispatcharr Live TV & EPG Card */}
-          <div className="settingsCard">
-            <div className="cardHeader">
-              <h2><FiTv style={{ marginRight: 8, color: "var(--pink)" }} /> Dispatcharr Live TV & EPG Settings</h2>
-            </div>
-            <p className="description">
-              Connect to your local Dispatcharr instance to enable Live TV channel guides, EPG programming, and DVR recordings.
-            </p>
-            <form onSubmit={handleSaveDispatcharr} className="tokenForm">
-              <div className="inputGroup">
-                <label htmlFor="dispatcharrUrl">DISPATCHARR_SERVER_URL</label>
-                <div className="inputWrapper">
-                  <input
-                    id="dispatcharrUrl"
-                    type="text"
-                    value={dispatcharrUrl}
-                    onChange={(e) => setDispatcharrUrl(e.target.value)}
-                    placeholder="e.g. http://192.168.1.100:9000"
-                  />
-                </div>
-              </div>
-              <div className="inputGroup" style={{ marginTop: 12 }}>
-                <label htmlFor="dispatcharrApiKey">DISPATCHARR_API_KEY (Optional)</label>
-                <div className="inputWrapper">
-                  <input
-                    id="dispatcharrApiKey"
-                    type={showDispatcharrKey ? "text" : "password"}
-                    value={dispatcharrApiKey}
-                    onChange={(e) => setDispatcharrApiKey(e.target.value)}
-                    placeholder="Enter your Dispatcharr API Key..."
-                  />
-                  <button
-                    type="button"
-                    className="toggleVisibility"
-                    onClick={() => setShowDispatcharrKey(!showDispatcharrKey)}
-                  >
-                    {showDispatcharrKey ? <FiEyeOff /> : <FiEye />}
-                  </button>
-                </div>
-              </div>
-              {dispatcharrStatus && (
-                <div className={`statusBanner ${dispatcharrStatus.type}`}>
-                  {dispatcharrStatus.type === "success" && <FiCheckCircle />}
-                  {dispatcharrStatus.type === "info" && <FiInfo />}
-                  <span>{dispatcharrStatus.text}</span>
-                </div>
-              )}
-              <div className="buttonGroup" style={{ marginTop: 15 }}>
-                <button type="submit" className="saveBtn">
-                  <FiSave /> Save Dispatcharr Config
-                </button>
-                {dispatcharrUrl && (
-                  <button type="button" className="clearBtn" onClick={handleClearDispatcharr}>
-                    Clear Config
-                  </button>
-                )}
-              </div>
-            </form>
           </div>
 
           {/* Home Screen Category Manager */}

@@ -121,7 +121,7 @@ const AboutPage = () => {
             </div>
             <span className="appBadge">{APP_VERSION} ({isTvApp ? "Android TV Client" : "Self-Hosted Web Instance"})</span>
             <p className="appTagline">
-              The ultimate high-performance media streaming client for Movies, TV Series, and Live TV.
+              The ultimate high-performance media streaming client for Movies and TV Series.
             </p>
           </div>
 
