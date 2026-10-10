@@ -1,10 +1,10 @@
 {
-  "version": "1.0.0-nightly.20261009",
-  "versionName": "1.0.0-nightly.20261009",
-  "versionCode": 20261009,
-  "build": 20261009,
+  "version": "1.0.0-nightly.20261010",
+  "versionName": "1.0.0-nightly.20261010",
+  "versionCode": 20261010,
+  "build": 20261010,
   "name": "BubbaFlix TV (Nightly)",
   "channel": "nightly",
   "apkUrl": "https://github.com/jsanderstechnologies/BubbaFlix_AndroidTV/releases/download/nightly/BubbaFlixTV-Nightly.apk",
-  "releaseNotes": "Automated Nightly Build (1.0.0-nightly.20261009)"
+  "releaseNotes": "Automated Nightly Build (1.0.0-nightly.20261010)"
 }
